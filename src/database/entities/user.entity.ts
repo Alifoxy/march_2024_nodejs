@@ -5,6 +5,8 @@ import { TableNameEnum } from './enums/table-name.enum';
 import { LikeEntity } from './like.entity';
 import { CreateUpdateModel } from './models/create-update.model';
 import { RefreshTokenEntity } from './refresh-token.entity';
+import { FollowEntity } from './follow.entity';
+import { CommentEntity } from './comment.entity';
 
 @Entity(TableNameEnum.USERS)
 export class UserEntity extends CreateUpdateModel {
@@ -29,6 +31,9 @@ export class UserEntity extends CreateUpdateModel {
   @Column('text', { nullable: true })
   image: string;
 
+  @Column('timestamp', { nullable: true })
+  deleted?: Date;
+
   @OneToMany(() => RefreshTokenEntity, (entity) => entity.user)
   refreshTokens?: RefreshTokenEntity[];
 
@@ -37,4 +42,13 @@ export class UserEntity extends CreateUpdateModel {
 
   @OneToMany(() => LikeEntity, (entity) => entity.user)
   likes?: LikeEntity[];
+
+  @OneToMany(() => CommentEntity, (entity) => entity.user)
+  comments?: CommentEntity[];
+
+  @OneToMany(() => FollowEntity, (entity) => entity.follower)
+  followers?: FollowEntity[];
+
+  @OneToMany(() => FollowEntity, (entity) => entity.following)
+  followings?: FollowEntity[];
 }

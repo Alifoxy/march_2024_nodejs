@@ -20,27 +20,7 @@ import {
 import { TransformHelper } from '../../../../../common/helpers/transform.helper';
 import { GenderEnum } from '../../enums/gender.enum';
 
-export class CarBaseReqDto {
-  @Transform(TransformHelper.trim)
-  @Transform(TransformHelper.toLowerCase)
-  @IsString()
-  @Length(3, 50)
-  producer: string;
-
-  @Transform(TransformHelper.trim)
-  @Transform(TransformHelper.toLowerCase)
-  @IsString()
-  @Length(3, 50)
-  model: string;
-
-  @ApiProperty({ example: 2021 })
-  @Type(() => Number)
-  @IsInt()
-  @Min(1900)
-  year: number;
-}
-
-export class UserBaseReqDto {
+export class UserBasedReqDto {
   @Transform(TransformHelper.trim)
   @Transform(TransformHelper.toLowerCase)
   @IsString()
@@ -88,4 +68,24 @@ export class UserBaseReqDto {
   @IsArray()
   @Type(() => CarBaseReqDto)
   cars: CarBaseReqDto[];
+}
+
+export class CarBaseReqDto {
+  @Transform(TransformHelper.trim)
+  @Transform(TransformHelper.toLowerCase)
+  @IsString()
+  @Length(3, 50)
+  producer: string;
+
+  @Transform(TransformHelper.trim)
+  @Transform(TransformHelper.toLowerCase)
+  @IsString()
+  @Length(3, 50)
+  model: string;
+
+  @ApiProperty({ example: 2021 })
+  @Type(() => Number)
+  @IsInt()
+  @Min(1900)
+  year: number;
 }
